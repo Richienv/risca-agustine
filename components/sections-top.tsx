@@ -101,7 +101,10 @@ export function Hero() {
         <FadeUp delay={950}>
           <div className="mt-6 md:mt-7 flex flex-wrap items-center justify-center gap-2.5">
             <PillButton variant="cream">Saya Mau Perubahan</PillButton>
-            <button
+            <a
+              href="https://api.whatsapp.com/send/?phone=6281260006303&text&type=phone_number&app_absent=0"
+              target="_blank"
+              rel="noreferrer"
               className="pill"
               style={{
                 borderColor: "transparent",
@@ -110,8 +113,8 @@ export function Hero() {
                 textUnderlineOffset: 5,
               }}
             >
-              Gabung Komunitas
-            </button>
+              Hubungi Kami
+            </a>
           </div>
         </FadeUp>
       </div>

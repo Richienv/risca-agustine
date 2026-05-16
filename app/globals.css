@@ -564,38 +564,24 @@ section:has(.animate-marquee):hover .animate-marquee {
     rgba(168, 50, 40, 0.85),
     rgba(168, 50, 40, 0.25)
   );
-  height: 0;
-  animation: bar-grow 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: bottom;
+  transform: scaleY(0);
 }
-@keyframes bar-grow {
-  0% {
-    height: 0;
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
+.bars > span:nth-child(1) { height: 32%; }
+.bars > span:nth-child(2) { height: 22%; }
+.bars > span:nth-child(3) { height: 50%; }
+.bars > span:nth-child(4) { height: 78%; }
+.bars > span:nth-child(5) { height: 95%; }
+@keyframes bar-loop {
+  0%, 8% { transform: scaleY(0); opacity: 0.4; }
+  35%, 72% { transform: scaleY(1); opacity: 1; }
+  93%, 100% { transform: scaleY(0); opacity: 0.4; }
 }
-.dash-card.in .bars > span:nth-child(1) {
-  animation-delay: 0.05s;
-  height: 32%;
-}
-.dash-card.in .bars > span:nth-child(2) {
-  animation-delay: 0.15s;
-  height: 22%;
-}
-.dash-card.in .bars > span:nth-child(3) {
-  animation-delay: 0.25s;
-  height: 50%;
-}
-.dash-card.in .bars > span:nth-child(4) {
-  animation-delay: 0.35s;
-  height: 78%;
-}
-.dash-card.in .bars > span:nth-child(5) {
-  animation-delay: 0.45s;
-  height: 95%;
-}
+.dash-card.in .bars > span:nth-child(1) { animation: bar-loop 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 0s; }
+.dash-card.in .bars > span:nth-child(2) { animation: bar-loop 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.1s; }
+.dash-card.in .bars > span:nth-child(3) { animation: bar-loop 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.2s; }
+.dash-card.in .bars > span:nth-child(4) { animation: bar-loop 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.3s; }
+.dash-card.in .bars > span:nth-child(5) { animation: bar-loop 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.4s; }
 
 /* Gauge (semicircle of bars) */
 .gauge {
@@ -617,17 +603,28 @@ section:has(.animate-marquee):hover .animate-marquee {
   background: linear-gradient(180deg, #a83228, rgba(168, 50, 40, 0.3));
   border-radius: 3px;
   transform-origin: 50% 60px;
+  transform: var(--rot) translateX(-50%) scaleY(0);
   opacity: 0;
-  animation: gauge-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-@keyframes gauge-pop {
-  to {
+.gauge-segs > span[data-active="false"] {
+  background: linear-gradient(180deg, rgba(168, 50, 40, 0.3), rgba(168, 50, 40, 0.08));
+}
+@keyframes gauge-pop-loop {
+  0%, 5% {
+    transform: var(--rot) translateX(-50%) scaleY(0);
+    opacity: 0;
+  }
+  22%, 76% {
+    transform: var(--rot) translateX(-50%) scaleY(1);
     opacity: 1;
-    transform: var(--rot) translateX(-50%);
+  }
+  92%, 100% {
+    transform: var(--rot) translateX(-50%) scaleY(0);
+    opacity: 0;
   }
 }
 .dash-card.in .gauge-segs > span {
-  animation-play-state: running;
+  animation: gauge-pop-loop 4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 .gauge-pct {
   position: absolute;
@@ -737,11 +734,11 @@ section:has(.animate-marquee):hover .animate-marquee {
   stroke-dasharray: 300;
   stroke-dashoffset: 300;
 }
-.dash-card.in .dc-line path.live {
-  animation: line-draw 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes line-draw-loop {
+  0%, 5% { stroke-dashoffset: 300; opacity: 0.3; }
+  40%, 78% { stroke-dashoffset: 0; opacity: 1; }
+  93%, 100% { stroke-dashoffset: 300; opacity: 0.3; }
 }
-@keyframes line-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+.dash-card.in .dc-line path.live {
+  animation: line-draw-loop 3.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }

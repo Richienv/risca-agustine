@@ -105,11 +105,11 @@ function DashGauge({ pct = 80 }: { pct?: number }) {
             return (
               <span
                 key={i}
+                data-active={String(active)}
                 style={
                   {
                     "--rot": `rotate(${angle}deg)`,
                     animationDelay: `${i * 60}ms`,
-                    opacity: active ? 1 : 0.25,
                   } as CSSProperties
                 }
               />

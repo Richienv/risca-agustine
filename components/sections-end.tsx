@@ -487,101 +487,106 @@ export function Pricing() {
             sesuai dengan visi dan komitmen Anda hari ini.
           </p>
         </FadeUp>
-        <div className="mt-11 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div className="mt-11 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 items-start">
           {PKG.map((p, i) => (
-            <ImgRise key={p.name} delay={i * 130}>
-              <div
-                className={`relative rounded-2xl p-6 md:p-8 h-full flex flex-col ${p.dark ? "bg-red-deep text-cream" : "bg-white/60 border-2 border-red-deep/20 text-red-deep"}`}
-              >
-                {p.badge && (
-                  <div className="absolute -top-2.5 left-6 px-2.5 py-1 rounded-full bg-cream text-red-deep text-[9.5px] uppercase tracking-[0.22em] font-bold border border-red-deep">
-                    {p.badge}
-                  </div>
-                )}
+            <div key={p.name} className={p.badge ? "relative pt-5" : "relative"}>
+              {p.badge && (
+                <div className="absolute top-1 left-6 z-10 px-2.5 py-1 rounded-full bg-cream text-red-deep text-[9.5px] uppercase tracking-[0.22em] font-bold border border-red-deep">
+                  {p.badge}
+                </div>
+              )}
+              <ImgRise delay={i * 130}>
                 <div
-                  className={`text-[9.5px] uppercase tracking-[0.28em] ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
+                  className={`relative rounded-2xl p-6 md:p-8 flex flex-col ${p.dark ? "bg-red-deep text-cream" : "bg-white/60 border-2 border-red-deep/20 text-red-deep"}`}
                 >
-                  {p.name}
-                </div>
-                <div className="font-display text-3xl md:text-4xl mt-2">
-                  {p.price}
-                </div>
-                <p
-                  className={`text-[13px] md:text-[14px] leading-relaxed mt-2.5 ${p.dark ? "text-cream/80" : "text-red-deep/85"}`}
-                >
-                  {p.desc}
-                </p>
-                <div className="mt-5">
                   <div
-                    className={`text-[9.5px] uppercase tracking-[0.22em] ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
+                    className={`text-[9.5px] uppercase tracking-[0.28em] ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
                   >
-                    Kriteria
+                    {p.name}
                   </div>
-                  <ul className="mt-2.5 space-y-1.5">
-                    {p.criteria.map((c) => (
-                      <li
-                        key={c}
-                        className="flex items-start gap-2 text-[13px] leading-relaxed"
-                      >
-                        <span
-                          className={`mt-0.5 ${p.dark ? "text-cream" : "text-red-deep"}`}
-                        >
-                          <CheckIcon size={13} />
-                        </span>
-                        <span>{c}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-5">
-                  <div
-                    className={`text-[9.5px] uppercase tracking-[0.22em] ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
-                  >
-                    Benefit
+                  <div className="font-display text-3xl md:text-4xl mt-2">
+                    {p.price}
                   </div>
-                  <ul
-                    className={`mt-2.5 divide-y ${p.dark ? "divide-cream/15" : "divide-red-deep/15"}`}
+                  <p
+                    className={`text-[13px] md:text-[14px] leading-relaxed mt-2.5 ${p.dark ? "text-cream/80" : "text-red-deep/85"}`}
                   >
-                    {p.benefits.map(([k, v]) => (
-                      <li
-                        key={k}
-                        className="flex items-center justify-between gap-3 py-2 text-[13px]"
-                      >
-                        <span
-                          className={`${p.dark ? "text-cream/70" : "text-red-deep/65"}`}
-                        >
-                          {k}
-                        </span>
-                        <span className="font-medium text-right">{v}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-auto pt-7">
-                  <button
-                    className={`pill w-full justify-center ${p.dark ? "" : "pill-red"}`}
-                    style={
-                      p.dark
-                        ? {
-                            background: "#F2E7CC",
-                            color: "#A83228",
-                            borderColor: "#F2E7CC",
-                          }
-                        : {}
-                    }
-                  >
-                    {p.cta}
-                  </button>
-                  {p.priceSub && (
-                    <p
-                      className={`text-[11px] mt-2.5 italic ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
+                    {p.desc}
+                  </p>
+                  <div className="mt-5">
+                    <div
+                      className={`text-[9.5px] uppercase tracking-[0.22em] ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
                     >
-                      {p.priceSub}
-                    </p>
-                  )}
+                      Kriteria
+                    </div>
+                    <ul className="mt-2.5 space-y-1.5">
+                      {p.criteria.map((c) => (
+                        <li
+                          key={c}
+                          className="flex items-start gap-2 text-[13px] leading-relaxed"
+                        >
+                          <span
+                            className={`mt-0.5 ${p.dark ? "text-cream" : "text-red-deep"}`}
+                          >
+                            <CheckIcon size={13} />
+                          </span>
+                          <span>{c}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-5">
+                    <div
+                      className={`text-[9.5px] uppercase tracking-[0.22em] ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
+                    >
+                      Benefit
+                    </div>
+                    <ul
+                      className={`mt-2.5 divide-y ${p.dark ? "divide-cream/15" : "divide-red-deep/15"}`}
+                    >
+                      {p.benefits.map(([k, v]) => (
+                        <li
+                          key={k}
+                          className="flex items-center justify-between gap-3 py-2 text-[13px]"
+                        >
+                          <span
+                            className={`${p.dark ? "text-cream/70" : "text-red-deep/65"}`}
+                          >
+                            {k}
+                          </span>
+                          <span className="font-medium text-right">{v}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-auto pt-7">
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=6281260006303&text&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`pill w-full justify-center ${p.dark ? "" : "pill-red"}`}
+                      style={
+                        p.dark
+                          ? {
+                              background: "#F2E7CC",
+                              color: "#A83228",
+                              borderColor: "#F2E7CC",
+                            }
+                          : {}
+                      }
+                    >
+                      {p.cta}
+                    </a>
+                    {p.priceSub && (
+                      <p
+                        className={`text-[11px] mt-2.5 italic ${p.dark ? "text-cream/65" : "text-red-deep/55"}`}
+                      >
+                        {p.priceSub}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </ImgRise>
+              </ImgRise>
+            </div>
           ))}
         </div>
         <FadeUp delay={400}>
@@ -590,6 +595,22 @@ export function Pricing() {
               &quot;Bayangin hidupmu 1–5 tahun kedepan menjadi apa? … semua
               mulai dari satu keputusan hari ini.&quot;
             </div>
+          </div>
+        </FadeUp>
+        <FadeUp delay={550}>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="https://api.whatsapp.com/send/?phone=6281260006303&text&type=phone_number&app_absent=0"
+              target="_blank"
+              rel="noreferrer"
+              className="pill pill-red inline-flex items-center gap-2"
+            >
+              <WhatsappIcon size={15} />
+              Hubungi Kami
+            </a>
+            <span className="text-red-deep/45 text-[11px] uppercase tracking-[0.22em]">
+              atau tanya dulu via WhatsApp
+            </span>
           </div>
         </FadeUp>
       </div>
@@ -700,7 +721,7 @@ export function BuildYourDream() {
         <FadeUp delay={400}>
           <div className="mt-8 inline-flex">
             <a
-              href="https://wa.me/6281260006303"
+              href="https://api.whatsapp.com/send/?phone=6281260006303&text&type=phone_number&app_absent=0"
               target="_blank"
               rel="noreferrer"
               className="pill pill-red inline-flex items-center gap-2.5"
@@ -768,7 +789,7 @@ export function Footer() {
                 <span className="text-[13px]">@risca.agustine</span>
               </a>
               <a
-                href="https://wa.me/6281260006303"
+                href="https://api.whatsapp.com/send/?phone=6281260006303&text&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2.5 text-cream hover:text-cream-light transition-colors"
