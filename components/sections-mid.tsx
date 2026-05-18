@@ -88,6 +88,7 @@ function DashBars({ pct = "85%" }: { pct?: string }) {
 
 function DashGauge({ pct = 80 }: { pct?: number }) {
   const segs = 14;
+  const cx = 80, cy = 88, r = 66;
   return (
     <div className="bal mt-3.5">
       <div className="bal-row">
@@ -98,25 +99,36 @@ function DashGauge({ pct = 80 }: { pct?: number }) {
         <span className="dc-tag">21 hari</span>
       </div>
       <div className="gauge">
-        <div className="gauge-segs">
+        <svg viewBox="0 0 160 90" width="160" height="90">
           {Array.from({ length: segs }).map((_, i) => {
-            const angle = -90 + (i / (segs - 1)) * 180;
+            const rad = ((-180 + (i / (segs - 1)) * 180) * Math.PI) / 180;
             const active = i / (segs - 1) <= pct / 100;
+            const x1 = cx + (r - 14) * Math.cos(rad);
+            const y1 = cy + (r - 14) * Math.sin(rad);
+            const x2 = cx + r * Math.cos(rad);
+            const y2 = cy + r * Math.sin(rad);
             return (
-              <span
+              <line
                 key={i}
-                data-active={String(active)}
-                style={
-                  {
-                    "--rot": `rotate(${angle}deg)`,
-                    animationDelay: `${i * 60}ms`,
-                  } as CSSProperties
-                }
+                x1={x1.toFixed(1)} y1={y1.toFixed(1)}
+                x2={x2.toFixed(1)} y2={y2.toFixed(1)}
+                stroke={active ? "#a83228" : "rgba(168,50,40,0.18)"}
+                strokeWidth={active ? 3.5 : 2}
+                strokeLinecap="round"
+                className="gauge-tick"
+                style={{ animationDelay: `${i * 55}ms` } as CSSProperties}
               />
             );
           })}
-        </div>
-        <div className="gauge-pct">{pct}%</div>
+          <text
+            x={cx} y={cy - 12}
+            textAnchor="middle"
+            fill="#a83228"
+            style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: "bold" } as CSSProperties}
+          >
+            {pct}%
+          </text>
+        </svg>
       </div>
     </div>
   );

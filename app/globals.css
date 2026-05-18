@@ -583,58 +583,23 @@ section:has(.animate-marquee):hover .animate-marquee {
 .dash-card.in .bars > span:nth-child(4) { animation: bar-loop 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.3s; }
 .dash-card.in .bars > span:nth-child(5) { animation: bar-loop 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite 0.4s; }
 
-/* Gauge (semicircle of bars) */
+/* Gauge (SVG semicircle of ticks) */
 .gauge {
-  position: relative;
   width: 160px;
   height: 90px;
   margin: 14px auto 0;
+  display: block;
 }
-.gauge-segs {
-  position: absolute;
-  inset: 0;
-}
-.gauge-segs > span {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 6px;
-  height: 30px;
-  background: linear-gradient(180deg, #a83228, rgba(168, 50, 40, 0.3));
-  border-radius: 3px;
-  transform-origin: 50% 60px;
-  transform: var(--rot) translateX(-50%) scaleY(0);
+.gauge-tick {
   opacity: 0;
 }
-.gauge-segs > span[data-active="false"] {
-  background: linear-gradient(180deg, rgba(168, 50, 40, 0.3), rgba(168, 50, 40, 0.08));
+@keyframes tick-pop-loop {
+  0%, 5%   { opacity: 0; }
+  22%, 76% { opacity: 1; }
+  92%, 100% { opacity: 0; }
 }
-@keyframes gauge-pop-loop {
-  0%, 5% {
-    transform: var(--rot) translateX(-50%) scaleY(0);
-    opacity: 0;
-  }
-  22%, 76% {
-    transform: var(--rot) translateX(-50%) scaleY(1);
-    opacity: 1;
-  }
-  92%, 100% {
-    transform: var(--rot) translateX(-50%) scaleY(0);
-    opacity: 0;
-  }
-}
-.dash-card.in .gauge-segs > span {
-  animation: gauge-pop-loop 4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-}
-.gauge-pct {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 4px;
-  text-align: center;
-  font-family: var(--font-display), sans-serif;
-  font-size: 22px;
-  color: #a83228;
+.dash-card.in .gauge-tick {
+  animation: tick-pop-loop 4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 /* Balance card (mini money panel) */
